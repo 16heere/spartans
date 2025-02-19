@@ -1,0 +1,54 @@
+/* SBL.css */
+
+/* Container styles */
+.sbl-container {
+    max-width: 1000px;
+    margin: 0 auto;
+    overflow-x: hidden; /* Hide overflow horizontally */
+    padding: 20px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    background-color: #ffffff;
+    border-radius: 8px;
+    position: relative; /* Ensure relative positioning */
+}
+
+/* Title styles (assuming 'Hero' component style) */
+h1 {
+    font-size: 2.5rem;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+/* Table container styles */
+.sbl-table-container {
+    overflow-x: auto; /* Enable horizontal scrolling */
+    padding-bottom: 20px; /* Optional: Add some bottom padding to prevent content from being hidden under scrollbar */
+}
+
+/* Table styles */
+.sbl-table {
+    width: max-content; /* Set table width to expand to its content */
+    min-width: 100%; /* Ensure table stretches to fit container width */
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+.sbl-table-head {
+    background-color: #f0f0f0;
+}
+
+.sbl-table th,
+.sbl-table td {
+    padding: 12px;
+    text-align: center;
+    white-space: nowrap; /* Prevent text wrapping in cells */
+}
+
+/* Row styles */
+.sbl-table-row:nth-child(even) {
+    background-color: #f9f9f9;
+}
+
+.sbl-table-row:hover {
+    background-color: #e0e0e0;
+}

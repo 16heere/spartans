@@ -1,0 +1,72 @@
+.news-container {
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+.news-container h1 {
+    font-size: 3rem;
+    margin-bottom: 20px;
+    text-align: center;
+    font-family: "NCAAMichiganStSpartans", "Poppins";
+}
+
+.news-grid {
+    display: grid;
+    gap: 20px;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+}
+
+.news-item {
+    display: block;
+    position: relative;
+    overflow: hidden;
+    background-color: #f0f0f0;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    text-decoration: none;
+}
+
+.news-item > div {
+    position: relative;
+    height: 200px; /* Adjust height as needed */
+    overflow: hidden;
+    border-radius: 8px;
+}
+
+.news-item img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+}
+
+.news-item > div > div {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    padding: 10px;
+    box-sizing: border-box;
+    z-index: 1;
+    color: #ffffff;
+    background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent background */
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.news-item:hover > div > div {
+    opacity: 1;
+}
+
+.news-item > div > div > h2 {
+    color: #ffffff;
+    font-size: 1.2rem;
+    margin-bottom: 10px;
+}
+
+.news-item > div > div > p {
+    color: #ffffff;
+    font-size: 0.9rem;
+    margin-top: 10px;
+}

@@ -1,0 +1,109 @@
+.camps-container {
+    max-width: 1200px;
+    margin: 50px auto;
+    padding: 20px;
+}
+
+.camps-grid {
+    display: grid;
+    gap: 30px;
+    grid-template-columns: repeat(
+        auto-fill,
+        minmax(500px, 1fr)
+    ); /* Default larger items */
+    justify-content: center; /* Align items centrally */
+}
+
+.camp-item {
+    position: relative;
+    overflow: hidden;
+    background-color: #f0f0f0;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    text-decoration: none;
+    width: 100%; /* Ensures the camp item takes full width within its grid column */
+}
+
+.camp-item a {
+    display: block;
+    width: 100%;
+    height: 100%;
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+.camp-image {
+    width: 100%;
+    object-fit: cover;
+    object-position: center;
+    display: block;
+    transition: transform 0.3s ease;
+}
+
+.camp-item:hover .camp-image {
+    transform: scale(1.05); /* Slight zoom effect on hover */
+}
+
+.camp-content {
+    position: absolute;
+    bottom: 10px;
+    left: 10px;
+    right: 10px;
+    color: #ffffff;
+    background-color: rgba(0, 0, 0, 0.7);
+    padding: 10px;
+    border-radius: 8px;
+    box-sizing: border-box;
+    z-index: 1;
+}
+
+.camp-content h2 {
+    margin: 0;
+    font-size: 1.5rem;
+    color: #ffffff;
+}
+
+/* Responsive Adjustments */
+@media (max-width: 1100px) {
+    .camps-grid {
+        grid-template-columns: 1fr;
+        justify-items: center;
+    }
+
+    .camp-item {
+        max-width: 600px; /* Center align with a specific width */
+    }
+}
+
+@media (max-width: 768px) {
+    .camp-item {
+        max-width: 500px;
+    }
+
+    .camps-container {
+        padding: 15px;
+    }
+
+    .camp-content h2 {
+        font-size: 1.2rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .camp-item {
+        width: 100%; /* Take full width on very small screens */
+        max-width: 300px;
+    }
+
+    .camps-container {
+        padding: 10px;
+    }
+
+    .camps-grid {
+        gap: 20px; /* Reduce gap for smaller screens */
+    }
+
+    .camp-content h2 {
+        font-size: 1rem;
+    }
+}

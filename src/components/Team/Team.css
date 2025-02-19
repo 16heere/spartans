@@ -1,0 +1,118 @@
+.headings {
+    width: 100%;
+    padding: 50px 0;
+}
+
+.headings ul {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+    flex-wrap: wrap; /* Allow items to wrap to the next line if needed */
+}
+
+.headings ul li {
+    font-size: 2rem;
+    padding: 10px 20px;
+    list-style: none;
+    background-color: black;
+    color: white;
+    border-radius: 10px;
+    margin: 10px; /* Add margin for spacing */
+}
+
+.headings ul li:hover {
+    scale: 1.1;
+}
+
+.heading {
+    font-size: 2rem;
+    padding: 10px 20px;
+    text-decoration: none;
+    color: white;
+}
+
+.grid-container {
+    width: 90%;
+    margin: 50px auto;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    justify-content: center;
+    gap: 30px;
+}
+
+.grid-container a {
+    text-decoration: none;
+}
+
+/* Responsive adjustments */
+@media (max-width: 1200px) {
+    .headings ul li {
+        font-size: 1.75rem;
+        padding: 10px 15px;
+    }
+}
+
+@media (max-width: 992px) {
+    .headings ul li {
+        font-size: 1.5rem;
+        padding: 10px 10px;
+    }
+}
+
+@media (max-width: 768px) {
+    .headings ul {
+        flex-direction: column; /* Stack vertically */
+    }
+
+    .headings ul li {
+        width: 100%;
+        font-size: 1.5rem;
+        text-align: center;
+    }
+}
+
+@media (max-width: 576px) {
+    .headings ul li {
+        font-size: 1.25rem;
+        padding: 10px 5px;
+    }
+}
+
+/* Container for the buttons */
+.buttons-container {
+    display: flex;
+    justify-content: center;
+    gap: 20px; /* Spacing between buttons */
+    margin: 20px 0; /* Space above and below the buttons */
+}
+
+/* Styling for each button */
+.nav-button {
+    padding: 10px 20px;
+    background-color: black;
+    color: white;
+    text-decoration: none;
+    border-radius: 10px;
+    font-size: 1.5rem;
+    transition: transform 0.3s ease;
+}
+
+/* Hover effect for buttons */
+.nav-button:hover {
+    transform: scale(1.1);
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .buttons-container {
+        flex-direction: column; /* Stack buttons vertically */
+        gap: 15px; /* Adjust spacing for vertical layout */
+    }
+
+    .nav-button {
+        width: 100%;
+        text-align: center;
+    }
+}

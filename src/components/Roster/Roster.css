@@ -1,0 +1,170 @@
+.headings {
+    width: 100%;
+    padding: 50px 0;
+}
+
+.headings ul li:hover {
+    scale: 1.1;
+}
+
+.headings ul {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+    flex-wrap: wrap; /* Allow items to wrap to the next line if needed */
+}
+
+.headings ul li {
+    height: 100%;
+    font-size: 2rem;
+    padding: 10px 20px;
+    list-style: none;
+    background-color: black;
+    color: white;
+    border-radius: 10px;
+    margin: 10px; /* Add margin for spacing */
+}
+
+.players {
+    list-style: none;
+    padding: 0;
+}
+
+.heading {
+    font-size: 2rem;
+    padding: 10px 20px;
+    text-decoration: none;
+    color: white;
+}
+
+.roster-table {
+    width: 90%; /* Adjust to fit within smaller screens */
+    margin: 50px auto;
+    overflow-x: auto; /* Allow horizontal scroll on small screens */
+}
+
+table {
+    width: 100%;
+    border: 1px solid;
+    border-spacing: 0;
+}
+
+th,
+td {
+    padding: 10px 5px;
+    border-top: 1px solid black;
+    border-bottom: 1px solid black;
+}
+
+.roster-table-head {
+    margin-bottom: 10px;
+}
+
+.roster-row td,
+.roster-table-head th {
+    font-size: 1.5rem;
+}
+
+.roster-row {
+    text-align: center;
+}
+
+/* Table styling */
+.roster-table {
+    width: 80%;
+    margin: 20px auto;
+    border-collapse: collapse;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.roster-table-head th {
+    background-color: #f2f2f2;
+    color: #333;
+    font-weight: bold;
+    padding: 10px;
+    text-align: left;
+    border-bottom: 2px solid #ddd;
+    text-align: center;
+}
+
+.roster-row {
+    transition: background-color 0.3s ease;
+}
+
+.roster-row:hover {
+    background-color: #f9f9f9;
+}
+
+.table-data {
+    padding: 10px;
+    border-bottom: 1px solid #ddd;
+}
+
+.table-data a {
+    text-decoration: none;
+    color: inherit;
+    transition: color 0.1s ease;
+}
+
+.table-data a:hover {
+    color: #007bff;
+}
+
+.table-data p {
+    margin: 0;
+}
+
+.grey-text {
+    color: grey;
+}
+
+/* Responsive adjustments */
+@media (max-width: 1200px) {
+    .headings ul li {
+        font-size: 1.75rem;
+        padding: 10px 15px;
+    }
+}
+
+@media (max-width: 992px) {
+    .headings ul li {
+        font-size: 1.5rem;
+        padding: 10px 10px;
+    }
+
+    .roster-row td,
+    .roster-table-head th {
+        font-size: 1.25rem;
+    }
+}
+
+@media (max-width: 768px) {
+    .headings ul {
+        flex-direction: column; /* Stack vertically */
+    }
+
+    .headings ul li {
+        width: 100%;
+        font-size: 1.5rem;
+        text-align: center;
+    }
+
+    .roster-row td,
+    .roster-table-head th {
+        font-size: 1rem;
+    }
+}
+
+@media (max-width: 576px) {
+    .headings ul li {
+        font-size: 1.25rem;
+        padding: 10px 5px;
+    }
+
+    .roster-row td,
+    .roster-table-head th {
+        font-size: 0.875rem;
+    }
+}

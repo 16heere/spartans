@@ -1,0 +1,278 @@
+.submenu {
+    min-width: 200px;
+    display: block;
+    position: absolute;
+    top: 90%;
+    left: 0;
+    background-color: #004802;
+    cursor: pointer;
+    z-index: 1001;
+    white-space: nowrap;
+    overflow: visible;
+    color: white;
+}
+
+.submenu li {
+    width: 100%;
+}
+
+.submenu li a {
+    width: 100%;
+}
+
+.submenu-link-span:hover {
+    transform: scale(1.02);
+    border-radius: 0px;
+    border-bottom: 1px solid white;
+}
+
+.submenu-no-link-span:hover {
+    color: black;
+    background-color: white;
+}
+
+.navbar-menu-items {
+    position: relative;
+    flex: 1;
+    text-align: left;
+    white-space: nowrap;
+    border-radius: 10px;
+}
+
+.navbar-menu-items span {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-radius: 10px;
+    transition: background-color 0.3s ease-in-out;
+}
+
+.link-span {
+    padding: 10px;
+}
+
+.no-link-span {
+    padding: 0 10px;
+}
+
+.navbar-menu-items a {
+    display: block;
+    width: 100%;
+    text-decoration: none;
+    color: inherit;
+}
+
+.navbar-menu-items .link-span:hover {
+    color: black;
+    background-color: white;
+}
+
+.navbar-menu-items .no-link-span:hover {
+    color: black;
+    background-color: white;
+}
+
+ul {
+    cursor: pointer;
+}
+
+.navbar {
+    position: relative;
+    height: 100px;
+}
+
+.navbar-title {
+    position: absolute;
+    left: 10%;
+    font-family: "NCAAPurdueBoilerMakers";
+    color: #004802;
+    font-size: 2rem;
+    letter-spacing: 10px;
+}
+
+.navbar-logo {
+    position: absolute;
+    left: 1%;
+    top: 60%;
+    transform: translateY(-50%);
+    margin-right: 20px;
+}
+
+.navbar-logo img {
+    height: 95px;
+    z-index: 1001;
+    transition: transform 0.3s ease-in-out;
+}
+
+.navbar-logo img:hover {
+    transform: scale(1.05);
+}
+
+.navbar-top {
+    height: 60%;
+    background-color: white;
+    color: #004802;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+}
+
+.navbar-icons {
+    display: flex;
+    width: 25%;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.icons {
+    text-decoration: none;
+    color: #004802;
+    transition: transform 0.3s ease-in-out;
+}
+
+.icons:hover {
+    transform: scale(1.2);
+}
+
+.navbar-bottom {
+    height: 60%;
+    background-color: #004802;
+    color: white;
+    display: flex;
+    justify-content: flex-end;
+}
+
+.navbar-menu {
+    width: fit-content;
+    display: flex;
+    justify-self: flex-end;
+    align-items: center;
+}
+
+.navbar-menu li {
+    font-size: 1.3rem;
+    list-style: none;
+    padding: 10px;
+    text-decoration: none;
+    border-radius: 10px;
+}
+
+.navbar-menu-toggle {
+    display: none;
+}
+
+.hamburger {
+    display: none;
+    justify-content: center;
+    flex-direction: column;
+    cursor: pointer;
+}
+
+.hamburger div {
+    width: 25px;
+    height: 3px;
+    background-color: white;
+    margin: 4px;
+    transition: 0.4s;
+}
+
+@media (max-width: 1500px) {
+    .navbar-title {
+        letter-spacing: 3px;
+    }
+}
+
+@media (max-width: 1100px) {
+    .navbar-title {
+        letter-spacing: 0px;
+    }
+
+    .navbar-menu li span {
+        font-size: 1rem;
+        list-style: none;
+        padding: 5px;
+        text-decoration: none;
+        border-radius: 10px;
+    }
+}
+
+@media (max-width: 950px) {
+    .navbar-title {
+        display: none;
+    }
+
+    .navbar-menu {
+        display: none;
+        flex-direction: column;
+        width: 100%;
+        background-color: black;
+        position: absolute;
+        top: 120px;
+        left: 0;
+        z-index: 10000;
+    }
+
+    .navbar-menu li {
+        width: 100%;
+        margin: 0;
+        padding: 0;
+    }
+
+    .navbar-menu li span {
+        font-size: 1.2rem;
+        text-align: left;
+        padding: 15px;
+        border-bottom: 1px solid #575757;
+        border-radius: 0;
+    }
+
+    .navbar-menu .submenu {
+        position: relative;
+        background-color: grey;
+    }
+
+    .navbar-menu .submenu li {
+        padding: 0;
+    }
+
+    .navbar-menu .submenu .submenu-2 {
+        position: relative;
+        left: 0;
+        top: 0;
+        background-color: #004802;
+    }
+
+    .navbar-menu-items {
+        margin: 1rem 0;
+    }
+
+    .hamburger {
+        display: flex;
+    }
+
+    .navbar-menu.active {
+        display: flex;
+    }
+
+    .navbar-icons {
+        display: none;
+    }
+
+    .navbar-menu-items {
+        padding: 0;
+    }
+
+    .navbar-menu-items li {
+        border-radius: 0;
+    }
+
+    .navbar-menu-items .link-span:hover {
+        color: white;
+        background-color: black;
+    }
+
+    .navbar-menu-items .no-link-span:hover {
+        color: white;
+        background-color: black;
+    }
+}

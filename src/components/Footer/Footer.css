@@ -1,0 +1,184 @@
+#root {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+main {
+    flex: 1;
+}
+
+.footer-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    background-color: #004802;
+    color: white;
+    padding: 20px 0;
+}
+
+.footer-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-around;
+    text-align: center;
+    gap: 20px;
+    padding: 0 20px;
+}
+
+.me {
+    background-color: #004802;
+    color: white;
+    text-align: center;
+    padding: 10px 0;
+    font-size: 0.9rem;
+}
+
+.footer-wrapper img.bridge-logo {
+    height: 60px;
+    object-fit: contain;
+    margin-top: 10px;
+}
+
+.footer-wrapper h3 {
+    font-weight: 800;
+    margin: 10px 0;
+    font-size: 1.5rem;
+}
+
+.footer-wrapper p {
+    margin: 5px 0;
+    font-size: 1rem;
+}
+
+.footer-wrapper .footer-logos {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 15px;
+    margin-top: 10px;
+}
+
+.footer-wrapper .footer-logos a {
+    text-decoration: none;
+    color: white;
+    font-size: 1.5rem;
+    transition: transform 0.3s;
+}
+
+.footer-wrapper .footer-logos a:hover {
+    transform: scale(1.1);
+}
+
+.footer-contact-info {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+}
+
+.footer-contact-info h4,
+.footer-contact-info a {
+    font-size: 1rem;
+}
+
+.footer-contact-info a {
+    text-decoration: none;
+    color: white;
+    font-weight: 700;
+    padding: 10px 20px;
+    border-radius: 5px;
+    transition: background-color 0.3s;
+}
+
+.call-container {
+    position: relative;
+}
+
+#callButton {
+    cursor: pointer;
+    background-color: transparent;
+    color: white;
+    font-size: 1rem;
+    font-weight: 700;
+    padding: 10px 20px;
+    transition: background-color 0.3s;
+}
+
+#callButton:hover,
+.email-button:hover {
+    background-color: #006400;
+    color: white;
+}
+
+.tooltip {
+    visibility: hidden;
+    width: fit-content;
+    background-color: #333;
+    color: #fff;
+    text-align: center;
+    border-radius: 5px;
+    padding: 5px;
+    position: absolute;
+    z-index: 1;
+    bottom: 125%;
+    left: 50%;
+    transform: translateX(-50%);
+    opacity: 0;
+    transition: opacity 0.3s;
+}
+
+.tooltip::after {
+    content: "";
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    margin-left: -5px;
+    border-width: 5px;
+    border-style: solid;
+    border-color: #333 transparent transparent transparent;
+}
+
+.tooltip.visible {
+    visibility: visible;
+    opacity: 1;
+}
+
+/* Media Queries for Responsive Design */
+@media (min-width: 600px) {
+    .footer-wrapper {
+        flex-direction: row;
+        text-align: left;
+    }
+
+    .footer-wrapper img.bridge-logo {
+        height: 100px;
+    }
+
+    .footer-wrapper .footer-logos {
+        justify-content: flex-end;
+        flex: 1;
+    }
+
+    .footer-contact-info {
+        flex-direction: row;
+        align-items: center;
+        gap: 20px;
+    }
+}
+
+@media (max-width: 600px) {
+    .not-bridge-logo {
+        display: none;
+    }
+
+    .footer-contact-info a,
+    #callButton {
+        color: #ffae00;
+
+        text-decoration: underline;
+        text-underline-offset: 3px;
+    }
+}
