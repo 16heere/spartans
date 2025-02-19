@@ -98,7 +98,7 @@ const Footer = () => {
                         <FaGraduationCap size={30} />
                     </a>
                     <a
-                        href="https://amazon.com/"
+                        href="#"
                         target="_blank"
                         rel="noreferrer"
                         className="not-bridge-logo"
