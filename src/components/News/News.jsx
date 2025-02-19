@@ -4,8 +4,8 @@ import Hero from "../Hero/Hero";
 import "./News.css";
 import { createClient } from "contentful";
 
-const SPACE_ID = "887fjzj8n8ah";
-const API_KEY_PUBLISHED = "GR_4YFl89xoY5nHNCeRNl7Glu0ObTPSK3PAh6SAbcSI";
+const SPACE_ID = process.env.REACT_APP_CONTENTFUL_SPACE_ID;
+const API_KEY_PUBLISHED = process.env.REACT_APP_CONTENTFUL_API_KEY_PUBLISHED;
 
 const client = createClient({
     space: SPACE_ID,
