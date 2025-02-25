@@ -35,7 +35,7 @@ const Footer = () => {
                     <div className="footer-contact-info">
                         <h4>For Inquiries:</h4>
                         <a
-                            href="mailto:16heereshar@gmail.com"
+                            href="mailto:tongj@gravesendgrammar.com"
                             className="email-button"
                         >
                             Email
@@ -46,7 +46,7 @@ const Footer = () => {
                                 href="/"
                                 onClick={(e) => {
                                     e.preventDefault();
-                                    copyToClipboard("07397182792");
+                                    copyToClipboard("0123456789");
                                 }}
                             >
                                 Call
