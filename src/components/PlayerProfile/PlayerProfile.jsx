@@ -51,67 +51,81 @@ const PlayerProfile = () => {
             case "Bio":
                 return (
                     <div className="bio">
+                        <div
+                            className="bio-description"
+                            style={{ marginTop: "1rem" }}
+                        >
+                            {bio.description}
+                        </div>
                         <h2 style={{ marginTop: "50px" }}>Career Bests:</h2>
-                        <table className="bio-table stats-table">
-                            <thead>
-                                <tr>
-                                    <th>Points</th>
-                                    <th>Rebounds</th>
-                                    <th>Assists</th>
-                                    <th>Steals</th>
-                                    <th>FG Made</th>
-                                    <th>3PT Made</th>
-                                    <th>FT Made</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td>{bio.points}</td>
-                                    <td>{bio.rebounds}</td>
-                                    <td>{bio.assist}</td>
-                                    <td>{bio.steals}</td>
-                                    <td>{bio.fg}</td>
-                                    <td>{bio.three}</td>
-                                    <td>{bio.freethrow}</td>
-                                </tr>
-                            </tbody>
-                        </table>
+                        <div className="table-container">
+                            <table className="bio-table stats-table">
+                                <thead>
+                                    <tr>
+                                        <th>Points</th>
+                                        <th>Rebounds</th>
+                                        <th>Assists</th>
+                                        <th>Steals</th>
+                                        <th>FG Made</th>
+                                        <th>3PT Made</th>
+                                        <th>FT Made</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>{bio.points}</td>
+                                        <td>{bio.rebounds}</td>
+                                        <td>{bio.assist}</td>
+                                        <td>{bio.steals}</td>
+                                        <td>{bio.fg}</td>
+                                        <td>{bio.three}</td>
+                                        <td>{bio.freethrow}</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
                     </div>
                 );
             case "Stats":
                 return (
                     <div className="stats">
-                        <table className="stats-table">
-                            <thead>
-                                <tr>
-                                    <th></th>
-                                    <th>PPG</th>
-                                    <th>FG%</th>
-                                    <th>3PT%</th>
-                                    <th>APG</th>
-                                    <th>RPG</th>
-                                    <th>SPG</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                {stats.map((stat) => {
-                                    const partYear = (stat.year + 1) % 100;
-                                    return (
-                                        <tr key={stat.year}>
-                                            <td>
-                                                {stat.year}/{partYear}
-                                            </td>
-                                            <td>{stat.pointsPerGame}</td>
-                                            <td>{stat.fieldGoalPercentage}</td>
-                                            <td>{stat.threePointPercentage}</td>
-                                            <td>{stat.assistsPerGame}</td>
-                                            <td>{stat.reboundsPerGame}</td>
-                                            <td>{stat.stealsPerGame}</td>
-                                        </tr>
-                                    );
-                                })}
-                            </tbody>
-                        </table>
+                        <div className="table-container">
+                            <table className="stats-table">
+                                <thead>
+                                    <tr>
+                                        <th></th>
+                                        <th>PPG</th>
+                                        <th>FG%</th>
+                                        <th>3PT%</th>
+                                        <th>APG</th>
+                                        <th>RPG</th>
+                                        <th>SPG</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {stats.map((stat) => {
+                                        const partYear = (stat.year + 1) % 100;
+                                        return (
+                                            <tr key={stat.year}>
+                                                <td>
+                                                    {stat.year}/{partYear}
+                                                </td>
+                                                <td>{stat.pointsPerGame}</td>
+                                                <td>
+                                                    {stat.fieldGoalPercentage}
+                                                </td>
+                                                <td>
+                                                    {stat.threePointPercentage}
+                                                </td>
+                                                <td>{stat.assistsPerGame}</td>
+                                                <td>{stat.reboundsPerGame}</td>
+                                                <td>{stat.stealsPerGame}</td>
+                                            </tr>
+                                        );
+                                    })}
+                                </tbody>
+                            </table>
+                        </div>
                     </div>
                 );
             case "Videos":
