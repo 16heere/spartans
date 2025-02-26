@@ -38,27 +38,12 @@ const Footer = () => {
                             href="mailto:tongj@gravesendgrammar.com"
                             className="email-button"
                         >
-                            Email
+                            Email: <span>tongj@gravesendgrammar.com</span>
                         </a>
                         <div className="call-container">
-                            <a
-                                id="callButton"
-                                href="/"
-                                onClick={(e) => {
-                                    e.preventDefault();
-                                    copyToClipboard("0123456789");
-                                }}
-                            >
-                                Call
-                            </a>
-                            <div
-                                id="tooltip"
-                                className={`tooltip ${
-                                    tooltipVisible ? "visible" : ""
-                                }`}
-                            >
-                                Copied
-                            </div>
+                            <p id="callButton" href="/">
+                                Call: <span>01474 331893 ext 3076</span>
+                            </p>
                         </div>
                     </div>
                     <p>Church Walk, Gravesend, DA12 2PR</p>
