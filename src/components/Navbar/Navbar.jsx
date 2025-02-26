@@ -278,11 +278,7 @@ const Navbar = () => {
                     >
                         <FaGraduationCap size={30} className="icons" />
                     </a>
-                    <a
-                        href="https://amazon.com/"
-                        target="_blank"
-                        rel="noreferrer"
-                    >
+                    <a href="#" target="_blank" rel="noreferrer">
                         <GiClothes size={30} className="icons" />
                     </a>
                     <a
