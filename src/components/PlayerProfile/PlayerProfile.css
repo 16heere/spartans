@@ -55,30 +55,45 @@
 .left-bar {
     width: 100%;
     margin-top: 1rem;
-
     display: flex;
     flex-direction: column;
     align-items: center;
 }
 
-.left-bar .img {
+.left-bar-cont {
+    width: 75%;
+    text-align: center;
+    background-color: #004802;
+    border-radius: 10px;
+}
+
+.left-bar-cont hr {
+    width: 100%;
+}
+
+.left-bar .left-bar-cont .img {
     margin: 1rem;
     height: auto;
-    width: 100%;
-    max-width: 300px;
+    width: 80%;
+    min-width: 150px;
     border-radius: 8px;
     background-size: cover;
     background-position: center;
     background-color: white;
 }
 
-.left-bar .info {
+.left-bar .left-bar-cont .info {
+    width: 100%;
     font-size: 1rem;
-    padding: 1rem;
+    margin: 0;
+    padding: 0 50px 20px 50px;
     line-height: 1.5;
-    text-align: center;
-    background-color: #004802;
+    text-align: left;
     color: white;
+}
+
+.left-bar .left-bar-cont .info p {
+    padding: 10px 0;
 }
 
 .right-bar {

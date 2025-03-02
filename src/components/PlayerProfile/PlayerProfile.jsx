@@ -187,15 +187,56 @@ const PlayerProfile = () => {
                 </div>
                 <div className="full-player-info">
                     <div className="left-bar">
-                        <img className="img" src={player.image} alt="" />
-                        <div className="info">
-                            <p>Height: {player.height}</p>
-                            <p>
-                                Weight: {player.weight ? player.weight : "0KG"}
-                            </p>
-                            <p>Position: {player.position}</p>
-                            <p>Wingspan: {player.wingspan}</p>
-                            <p>Standing Reach: {player.standingReach}</p>
+                        <div className="left-bar-cont">
+                            <img className="img" src={player.image} alt="" />
+                            <div className="info">
+                                <p>
+                                    <span style={{ fontWeight: "700" }}>
+                                        Height:{" "}
+                                    </span>
+                                    <br />
+                                    {player.height}
+                                </p>
+                                <hr />
+                                <p>
+                                    <span style={{ fontWeight: "700" }}>
+                                        Position:{" "}
+                                    </span>
+                                    <br />
+                                    {player.position}
+                                </p>
+                                <hr />
+                                <p>
+                                    <span style={{ fontWeight: "700" }}>
+                                        Graduation Class:{" "}
+                                    </span>
+                                    <br />
+                                    {player.class}
+                                </p>
+                                <hr />
+                                <p>
+                                    <span style={{ fontWeight: "700" }}>
+                                        Nationality:{" "}
+                                    </span>{" "}
+                                    <br />
+                                    {player.nationality}
+                                </p>
+                                <hr />
+                                <p>
+                                    <span style={{ fontWeight: "700" }}>
+                                        Wingspan:{" "}
+                                    </span>{" "}
+                                    <br />
+                                    {player.wingspan}
+                                </p>
+                                <hr />
+                                <p>
+                                    <span style={{ fontWeight: "700" }}>
+                                        Standing Reach:{" "}
+                                    </span>
+                                    <br /> {player.standingReach}
+                                </p>
+                            </div>
                         </div>
                     </div>
                     <div className="right-bar">
