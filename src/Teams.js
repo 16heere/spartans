@@ -15,7 +15,7 @@ const initialPlayers = [
         weight: "69KG",
         wingspan: "6'5",
         standingReach: "7'7",
-        nationality: "Ghanaian",
+        nationality: "Ghanaian/English",
         hometown: "Gravesend",
         bio: {
             description:
@@ -51,6 +51,45 @@ const initialPlayers = [
                 stealsPerGame: 4.0,
             },
         ],
+        currentSeasonStats: {
+            teams: {
+                Mens: {
+                    pointsPerGame: 16.3,
+                    fieldGoalPercentage: "41.1%",
+                    threePointPercentage: "27.8%",
+                    assistsPerGame: 2.9,
+                    reboundsPerGame: 4.2,
+                    stealsPerGame: 3.0,
+                },
+                Academy: {
+                    pointsPerGame: 20.2,
+                    fieldGoalPercentage: "42.4%",
+                    threePointPercentage: "31.6%",
+                    assistsPerGame: 5.1,
+                    reboundsPerGame: 5.7,
+                    stealsPerGame: 4.2,
+                },
+            },
+        },
+        honors: [
+            { title: "Royals Classic Champion", year: "2023, 2024 & 2025" },
+            {
+                title: "Royals Classic All-Tournament Team",
+                year: "2023, 2024 & 2025",
+            },
+            { title: "Royals Classic MVP", year: "2024 & 2025" },
+            { title: "Kent County League Champion", year: "2022/23 & 2023/24" },
+            { title: "Kent County League Finals MVP", year: "2022/23" },
+            {
+                title: "NBL U18 South East Conference Champion",
+                year: "2023/24",
+            },
+            { title: "Senior Academy MVP", year: "2022/23" },
+            {
+                title: "Senior Academy ‘Chris Morgan’ Impact Award",
+                year: "2023/25",
+            },
+        ],
         profile: true,
         class: 2025,
     },
@@ -63,7 +102,7 @@ const initialPlayers = [
         weight: "77KG",
         wingspan: "6'8",
         standingReach: "8'2",
-        nationality: "German/Nigerian",
+        nationality: "German/Nigerian/English",
         hometown: "Kent",
         bio: {
             description:
@@ -99,10 +138,30 @@ const initialPlayers = [
                 stealsPerGame: 3.0,
             },
         ],
-        honors: [],
+        currentSeasonStats: {
+            teams: {
+                Mens: {
+                    pointsPerGame: 15.2,
+                    fieldGoalPercentage: "43.1%",
+                    threePointPercentage: "28.3%",
+                    assistsPerGame: 2.1,
+                    reboundsPerGame: 9.9,
+                    stealsPerGame: 2.1,
+                },
+                Academy: {
+                    pointsPerGame: 16.6,
+                    fieldGoalPercentage: "46.3%",
+                    threePointPercentage: "23.4%",
+                    assistsPerGame: 2.2,
+                    reboundsPerGame: 11.4,
+                    stealsPerGame: 3.9,
+                },
+            },
+        },
         profile: true,
         class: 2025,
     },
+
     // {
     //     firstName: "Eshar",
     //     lastName: "Heer",

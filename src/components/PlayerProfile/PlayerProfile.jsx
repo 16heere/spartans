@@ -73,6 +73,36 @@ const PlayerProfile = () => {
                                 </span>
                             </span>
                         </div>
+                        <div className="honors">
+                            {player.honors && player.honors.length > 0 ? (
+                                <div className="honors-table">
+                                    <table>
+                                        <thead>
+                                            <tr>
+                                                <th>Honor</th>
+                                                <th>Year</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            {player.honors.map(
+                                                (honor, index) => (
+                                                    <tr key={index}>
+                                                        <td className="honor-title">
+                                                            {honor.title}
+                                                        </td>
+                                                        <td className="honor-year">
+                                                            {honor.year}
+                                                        </td>
+                                                    </tr>
+                                                )
+                                            )}
+                                        </tbody>
+                                    </table>
+                                </div>
+                            ) : (
+                                <p>No honors recorded.</p>
+                            )}
+                        </div>
                         {/* <h2 style={{ marginTop: "50px" }}>Career Bests:</h2>
                         <div className="table-container">
                             <table className="bio-table stats-table">
@@ -105,6 +135,62 @@ const PlayerProfile = () => {
             case "Stats":
                 return (
                     <div className="stats">
+                        {player.currentSeasonStats &&
+                        player.currentSeasonStats.teams ? (
+                            <>
+                                <h3>Current Season Stats</h3>
+                                <div className="table-container">
+                                    <table className="stats-table">
+                                        <thead>
+                                            <tr>
+                                                <th>Team</th>
+                                                <th>PPG</th>
+                                                <th>FG%</th>
+                                                <th>3PT%</th>
+                                                <th>APG</th>
+                                                <th>RPG</th>
+                                                <th>SPG</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            {Object.entries(
+                                                player.currentSeasonStats.teams
+                                            ).map(([teamName, stats]) => (
+                                                <tr key={teamName}>
+                                                    <td>{teamName}</td>
+                                                    <td>
+                                                        {stats.pointsPerGame}
+                                                    </td>
+                                                    <td>
+                                                        {
+                                                            stats.fieldGoalPercentage
+                                                        }
+                                                    </td>
+                                                    <td>
+                                                        {
+                                                            stats.threePointPercentage
+                                                        }
+                                                    </td>
+                                                    <td>
+                                                        {stats.assistsPerGame}
+                                                    </td>
+                                                    <td>
+                                                        {stats.reboundsPerGame}
+                                                    </td>
+                                                    <td>
+                                                        {stats.stealsPerGame}
+                                                    </td>
+                                                </tr>
+                                            ))}
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </>
+                        ) : null}
+                        <br />
+                        <br />
+
+                        <h3>Past Seasons</h3>
                         <div className="table-container">
                             <table className="stats-table">
                                 <thead>

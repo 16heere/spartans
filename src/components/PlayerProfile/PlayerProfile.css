@@ -223,3 +223,36 @@
     overflow-x: auto;
     width: 100%;
 }
+
+.honors-table {
+    width: 100%;
+    margin-top: 1rem;
+    border-collapse: collapse;
+}
+
+.honors-table table {
+    width: 100%;
+}
+
+.honors-table th,
+.honors-table td {
+    border-bottom: 1px solid #ddd;
+    padding: 10px;
+    text-align: left;
+}
+
+.honors-table th {
+    color: white;
+    background-color: #004802;
+    font-weight: bold;
+}
+
+.honor-title {
+    text-align: left;
+    font-weight: 600;
+}
+
+.honor-year {
+    text-align: right;
+    font-style: italic;
+}
