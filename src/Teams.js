@@ -16,7 +16,7 @@ const initialPlayers = [
         hometown: "Gravesend",
         bio: {
             description:
-                "Chris is an extremely shift PG with an elite handle and the ability to score in volume. He plays with excellen pace in transition and excels coming off of the screen or handoff situations. He is a creative player that has a deep understanding of the game and is a coach's dream to work with. Chris lives in the gym and thrives in competitive environments.",
+                "Chris is an extremely shift PG with an elite handle and the ability to score in volume. He plays with excellent pace in transition and excels coming off of the screen or handoff situations. He is a creative player that has a deep understanding of the game and is a coach's dream to work with. Chris lives in the gym and thrives in competitive environments.",
             points: 100,
             rebounds: 100,
             assist: 100,
@@ -61,7 +61,7 @@ const initialPlayers = [
         hometown: "Kent",
         bio: {
             description:
-                "Olu is an outstanding athlete who plays above his size and can score at all three levels. He is an elite level shooter and has the intelligence to thrive in any offence. Defensibely he can guard multiple positions, is tenacious on the ball and leads the team in rebounds per game. Olu has a great work ethic, is hungry to develop and is a leader on and off of the court",
+                "Olu is an outstanding athlete who plays above his size and can score at all three levels. He is an elite level shooter and has the intelligence to thrive in any offence. Defensively he can guard multiple positions, is tenacious on the ball and leads the team in rebounds per game. Olu has a great work ethic, is hungry to develop and is a leader on and off of the court",
             points: 100,
             rebounds: 100,
             assist: 100,
