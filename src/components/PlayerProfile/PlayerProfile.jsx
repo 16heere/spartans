@@ -56,6 +56,22 @@ const PlayerProfile = () => {
                             style={{ marginTop: "1rem" }}
                         >
                             {bio.description}
+                            <br />
+                            <br />
+                            <span>
+                                <span style={{ fontWeight: 700 }}>
+                                    Jamie Tong
+                                </span>
+                                <br />
+                                <span
+                                    style={{
+                                        fontWeight: 400,
+                                        fontStyle: "italic",
+                                    }}
+                                >
+                                    Gravesend Spartans Head Coach
+                                </span>
+                            </span>
                         </div>
                         {/* <h2 style={{ marginTop: "50px" }}>Career Bests:</h2>
                         <div className="table-container">
