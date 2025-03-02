@@ -13,6 +13,8 @@ const initialPlayers = [
         position: "Point Guard",
         height: "5'11",
         weight: "69KG",
+        wingspan: "6'5",
+        standingReach: "7'7",
         hometown: "Gravesend",
         bio: {
             description:
@@ -58,6 +60,8 @@ const initialPlayers = [
         position: "Guard",
         height: "6'3",
         weight: "77KG",
+        wingspan: "6'8",
+        standingReach: "8'2",
         hometown: "Kent",
         bio: {
             description:

@@ -194,6 +194,8 @@ const PlayerProfile = () => {
                                 Weight: {player.weight ? player.weight : "0KG"}
                             </p>
                             <p>Position: {player.position}</p>
+                            <p>Wingspan: {player.wingspan}</p>
+                            <p>Standing Reach: {player.standingReach}</p>
                         </div>
                     </div>
                     <div className="right-bar">
