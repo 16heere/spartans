@@ -41,7 +41,7 @@ function App() {
 
             <main>
                 <Routes>
-                    <Route path="/" element={<Home />} />
+                    <Route path="/" element={<UnderConstruction />} />
                     <Route path="/sbl" element={<UnderConstruction />} />
                     <Route path="/news" element={<UnderConstruction />} />
                     <Route path="/camps" element={<UnderConstruction />} />

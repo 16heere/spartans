@@ -57,7 +57,7 @@ const PlayerProfile = () => {
                         >
                             {bio.description}
                         </div>
-                        <h2 style={{ marginTop: "50px" }}>Career Bests:</h2>
+                        {/* <h2 style={{ marginTop: "50px" }}>Career Bests:</h2>
                         <div className="table-container">
                             <table className="bio-table stats-table">
                                 <thead>
@@ -83,7 +83,7 @@ const PlayerProfile = () => {
                                     </tr>
                                 </tbody>
                             </table>
-                        </div>
+                        </div> */}
                     </div>
                 );
             case "Stats":
