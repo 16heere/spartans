@@ -51,7 +51,7 @@ const Footer = () => {
 
                 <div className="footer-logos">
                     <a
-                        href="https://www.instagram.com/gravesendgrammar_sport/"
+                        href="https://www.instagram.com/gravesendspartansbb/"
                         target="_blank"
                         rel="noreferrer"
                         className="not-bridge-logo"
@@ -91,7 +91,7 @@ const Footer = () => {
                         <GiClothes size={30} />
                     </a>
                     <a
-                        href="https://www.gravesendgrammar.com/"
+                        href="#"
                         target="_blank"
                         rel="noreferrer"
                         className="not-bridge-logo"

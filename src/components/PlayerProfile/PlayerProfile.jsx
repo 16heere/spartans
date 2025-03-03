@@ -79,7 +79,7 @@ const PlayerProfile = () => {
                                     <table>
                                         <thead>
                                             <tr>
-                                                <th>Honor</th>
+                                                <th>Honour</th>
                                                 <th>Year</th>
                                             </tr>
                                         </thead>
@@ -100,7 +100,7 @@ const PlayerProfile = () => {
                                     </table>
                                 </div>
                             ) : (
-                                <p>No honors recorded.</p>
+                                <p>No honours recorded.</p>
                             )}
                         </div>
                         {/* <h2 style={{ marginTop: "50px" }}>Career Bests:</h2>

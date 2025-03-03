@@ -87,7 +87,7 @@ const initialPlayers = [
             { title: "Senior Academy MVP", year: "2022/23" },
             {
                 title: "Senior Academy ‘Chris Morgan’ Impact Award",
-                year: "2023/25",
+                year: "2023/24",
             },
         ],
         profile: true,
@@ -158,6 +158,24 @@ const initialPlayers = [
                 },
             },
         },
+        honors: [
+            { title: "Royals Classic Champion", year: "2023, 2024 & 2025" },
+            {
+                title: "Royals Classic All-Tournament Team",
+                year: "2023, 2024 & 2025",
+            },
+            { title: "Royals Classic MVP", year: "2023" },
+            { title: "Kent County League Champion", year: "2022/23 & 2023/24" },
+            {
+                title: "NBL U18 South East Conference Champion",
+                year: "2023/24",
+            },
+            { title: "Senior Academy MVP", year: "2023/24" },
+            {
+                title: "Senior Academy MIP",
+                year: "2022/23",
+            },
+        ],
         profile: true,
         class: 2025,
     },

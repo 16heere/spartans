@@ -251,7 +251,7 @@ const Navbar = () => {
                 </p>
                 <div className="navbar-icons">
                     <a
-                        href="https://www.instagram.com/gravesendgrammar_sport/"
+                        href="https://www.instagram.com/gravesendspartansbb/"
                         target="_blank"
                         rel="noreferrer"
                     >
@@ -281,11 +281,7 @@ const Navbar = () => {
                     <a href="#" target="_blank" rel="noreferrer">
                         <GiClothes size={30} className="icons" />
                     </a>
-                    <a
-                        href="https://www.gravesendgrammar.com/"
-                        target="_blank"
-                        rel="noreferrer"
-                    >
+                    <a href="#" target="_blank" rel="noreferrer">
                         <FaCartShopping size={30} className="icons" />
                     </a>
                 </div>
