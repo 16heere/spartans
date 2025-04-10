@@ -1,21 +1,152 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import YouTube from "react-youtube";
 import { useNavigate, useParams } from "react-router-dom";
 import "./PlayerProfile.css";
 import { Players } from "../../Teams";
+import axios from "axios";
 
 const PlayerProfile = () => {
     const [section, setSection] = useState("Bio");
     const [selectedPlayer, setSelectedPlayer] = useState("");
+    const [reels, setReels] = useState([]);
+    const [selectedReel, setSelectedReel] = useState(null);
+    const [videos, setVideos] = useState([]);
+    const [selectedVideo, setSelectedVideo] = useState(null);
+
     const { playerFullName } = useParams();
+    const navigate = useNavigate();
+
     const playerFirstName = playerFullName.split("-")[0];
     const playerLastName = playerFullName.split("-")[1];
-    const navigate = useNavigate();
+
     const player = Players.find(
-        (player) =>
-            playerFirstName.toUpperCase() === player.firstName.toUpperCase() &&
-            playerLastName.toUpperCase() === player.lastName.toUpperCase()
+        (p) =>
+            p.firstName.toUpperCase() === playerFirstName.toUpperCase() &&
+            p.lastName.toUpperCase() === playerLastName.toUpperCase()
     );
+
+    useEffect(() => {
+        const loadReels = async () => {
+            if (!player || !player.playlistId) return;
+
+            const playlistId = player.playlistId;
+            const apiKey = process.env.REACT_APP_YT_API_KEY;
+
+            try {
+                const response = await axios.get(
+                    `https://www.googleapis.com/youtube/v3/playlistItems`,
+                    {
+                        params: {
+                            part: "snippet,status",
+                            maxResults: 20,
+                            playlistId,
+                            key: apiKey,
+                        },
+                    }
+                );
+
+                const items = response.data.items;
+
+                // Filter visible and "Private video" items
+                const visibleItems = items.filter(
+                    (item) => item.snippet.title !== "Private video"
+                );
+                const privateItems = items.filter(
+                    (item) => item.snippet.title === "Private video"
+                );
+
+                // Extract video IDs from private items
+                const privateIds = privateItems
+                    .map((item) => item.snippet?.resourceId?.videoId)
+                    .filter(Boolean);
+
+                // Fetch fallback titles for private videos
+                let fallbackReels = [];
+                if (privateIds.length > 0) {
+                    const fallbackResponse = await axios.get(
+                        `https://www.googleapis.com/youtube/v3/videos`,
+                        {
+                            params: {
+                                part: "snippet",
+                                id: privateIds.join(","),
+                                key: apiKey,
+                            },
+                        }
+                    );
+
+                    fallbackReels = fallbackResponse.data.items.map((item) => ({
+                        id: item.id,
+                        title: item.snippet.title,
+                    }));
+                }
+
+                // Build final list of reels
+                const visibleReels = visibleItems.map((item) => ({
+                    id: item.snippet.resourceId.videoId,
+                    title: item.snippet.title,
+                }));
+
+                const fetchedReels = [...visibleReels, ...fallbackReels];
+
+                // Set state
+                setReels(fetchedReels);
+                setSelectedReel(fetchedReels[0] || null);
+            } catch (error) {
+                console.error("Error fetching reels:", error);
+                setReels(player.reels || []);
+                setSelectedReel((player.reels || [])[0] || null);
+            }
+        };
+
+        loadReels();
+    }, [player]);
+
+    useEffect(() => {
+        const fetchVideoTitles = async () => {
+            if (!player || !player.videos || player.videos.length === 0) return;
+
+            try {
+                const apiKey = process.env.REACT_APP_YT_API_KEY;
+                const videoIds = player.videos.join(",");
+
+                const response = await axios.get(
+                    `https://www.googleapis.com/youtube/v3/videos`,
+                    {
+                        params: {
+                            part: "snippet",
+                            id: videoIds,
+                            key: apiKey,
+                        },
+                    }
+                );
+
+                const fetchedVideos = response.data.items.map((item) => ({
+                    id: item.id,
+                    title: item.snippet.title,
+                }));
+
+                setVideos(fetchedVideos);
+                setSelectedVideo(fetchedVideos[fetchedVideos.length - 1]);
+            } catch (error) {
+                console.error("Error fetching video titles:", error);
+                setVideos(
+                    player.videos.map((id) => ({
+                        id,
+                        title: `${player.firstName} ${player.lastName} - Video`,
+                    }))
+                );
+                setSelectedVideo(player.videos[player.videos.length - 1]);
+            }
+        };
+
+        fetchVideoTitles();
+    }, [player]);
+
+    useEffect(() => {
+        if (player && player.videos && player.videos.length > 0) {
+            setSelectedVideo(player.videos[player.videos.length - 1]);
+        }
+    }, [player]);
 
     if (!player) {
         return (
@@ -27,19 +158,16 @@ const PlayerProfile = () => {
         );
     }
 
-    const bio = player.bio ? player.bio : {};
-    const stats = player.stats ? player.stats : [];
-    const videos = player.videos ? player.videos : [];
-    stats.sort((a, b) => b.year - a.year);
-    const currentTeams = player.teams;
-    const sameTeamPlayers = Players.filter((otherPlayer) => {
-        if (otherPlayer.id === player.id) return false;
-        return otherPlayer.teams.some((team) => currentTeams.includes(team));
+    const bio = player.bio || {};
+    const stats = [...(player.stats || [])].sort((a, b) => b.year - a.year);
+    const currentTeams = player.teams || [];
+
+    const sameTeamPlayers = Players.filter((other) => {
+        if (other.id === player.id) return false;
+        return other.teams.some((team) => currentTeams.includes(team));
     });
 
-    const handleClick = (e) => {
-        setSection(e.target.innerText);
-    };
+    const handleClick = (e) => setSection(e.target.innerText);
 
     const handleSelectChange = (e) => {
         setSelectedPlayer(e.target.value);
@@ -59,84 +187,44 @@ const PlayerProfile = () => {
                             <br />
                             <br />
                             <span>
-                                <span style={{ fontWeight: 700 }}>
-                                    Jamie Tong
-                                </span>
+                                <strong>Jamie Tong</strong>
                                 <br />
-                                <span
-                                    style={{
-                                        fontWeight: 400,
-                                        fontStyle: "italic",
-                                    }}
-                                >
+                                <span style={{ fontStyle: "italic" }}>
                                     Gravesend Spartans Head Coach
                                 </span>
                             </span>
                         </div>
-                        <div className="honors">
-                            {player.honors && player.honors.length > 0 ? (
-                                <div className="honors-table">
-                                    <table>
-                                        <thead>
-                                            <tr>
-                                                <th>Honour</th>
-                                                <th>Year</th>
+                        {player.honors?.length > 0 && (
+                            <div className="honors-table">
+                                <table>
+                                    <thead>
+                                        <tr>
+                                            <th>Honour</th>
+                                            <th>Year</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        {player.honors.map((honor, index) => (
+                                            <tr key={index}>
+                                                <td className="honor-title">
+                                                    {honor.title}
+                                                </td>
+                                                <td className="honor-year">
+                                                    {honor.year}
+                                                </td>
                                             </tr>
-                                        </thead>
-                                        <tbody>
-                                            {player.honors.map(
-                                                (honor, index) => (
-                                                    <tr key={index}>
-                                                        <td className="honor-title">
-                                                            {honor.title}
-                                                        </td>
-                                                        <td className="honor-year">
-                                                            {honor.year}
-                                                        </td>
-                                                    </tr>
-                                                )
-                                            )}
-                                        </tbody>
-                                    </table>
-                                </div>
-                            ) : (
-                                <p>No honours recorded.</p>
-                            )}
-                        </div>
-                        {/* <h2 style={{ marginTop: "50px" }}>Career Bests:</h2>
-                        <div className="table-container">
-                            <table className="bio-table stats-table">
-                                <thead>
-                                    <tr>
-                                        <th>Points</th>
-                                        <th>Rebounds</th>
-                                        <th>Assists</th>
-                                        <th>Steals</th>
-                                        <th>FG Made</th>
-                                        <th>3PT Made</th>
-                                        <th>FT Made</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr>
-                                        <td>{bio.points}</td>
-                                        <td>{bio.rebounds}</td>
-                                        <td>{bio.assist}</td>
-                                        <td>{bio.steals}</td>
-                                        <td>{bio.fg}</td>
-                                        <td>{bio.three}</td>
-                                        <td>{bio.freethrow}</td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div> */}
+                                        ))}
+                                    </tbody>
+                                </table>
+                            </div>
+                        )}
                     </div>
                 );
+
             case "Stats":
                 return (
                     <div className="stats">
-                        {player.currentSeasonStats &&
-                        player.currentSeasonStats.teams ? (
+                        {player.currentSeasonStats?.teams && (
                             <>
                                 <h3>Current Season Stats</h3>
                                 <div className="table-container">
@@ -155,30 +243,38 @@ const PlayerProfile = () => {
                                         <tbody>
                                             {Object.entries(
                                                 player.currentSeasonStats.teams
-                                            ).map(([teamName, stats]) => (
+                                            ).map(([teamName, teamStats]) => (
                                                 <tr key={teamName}>
                                                     <td>{teamName}</td>
                                                     <td>
-                                                        {stats.pointsPerGame}
-                                                    </td>
-                                                    <td>
                                                         {
-                                                            stats.fieldGoalPercentage
+                                                            teamStats.pointsPerGame
                                                         }
                                                     </td>
                                                     <td>
                                                         {
-                                                            stats.threePointPercentage
+                                                            teamStats.fieldGoalPercentage
                                                         }
                                                     </td>
                                                     <td>
-                                                        {stats.assistsPerGame}
+                                                        {
+                                                            teamStats.threePointPercentage
+                                                        }
                                                     </td>
                                                     <td>
-                                                        {stats.reboundsPerGame}
+                                                        {
+                                                            teamStats.assistsPerGame
+                                                        }
                                                     </td>
                                                     <td>
-                                                        {stats.stealsPerGame}
+                                                        {
+                                                            teamStats.reboundsPerGame
+                                                        }
+                                                    </td>
+                                                    <td>
+                                                        {
+                                                            teamStats.stealsPerGame
+                                                        }
                                                     </td>
                                                 </tr>
                                             ))}
@@ -186,7 +282,8 @@ const PlayerProfile = () => {
                                     </table>
                                 </div>
                             </>
-                        ) : null}
+                        )}
+
                         <br />
                         <br />
 
@@ -195,7 +292,7 @@ const PlayerProfile = () => {
                             <table className="stats-table">
                                 <thead>
                                     <tr>
-                                        <th></th>
+                                        <th>Season</th>
                                         <th>PPG</th>
                                         <th>FG%</th>
                                         <th>3PT%</th>
@@ -205,60 +302,130 @@ const PlayerProfile = () => {
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    {stats.map((stat) => {
-                                        const partYear = (stat.year + 1) % 100;
-                                        return (
-                                            <tr key={stat.year}>
-                                                <td>
-                                                    {stat.year}/{partYear}
-                                                </td>
-                                                <td>{stat.pointsPerGame}</td>
-                                                <td>
-                                                    {stat.fieldGoalPercentage}
-                                                </td>
-                                                <td>
-                                                    {stat.threePointPercentage}
-                                                </td>
-                                                <td>{stat.assistsPerGame}</td>
-                                                <td>{stat.reboundsPerGame}</td>
-                                                <td>{stat.stealsPerGame}</td>
-                                            </tr>
-                                        );
-                                    })}
+                                    {stats.map((stat) => (
+                                        <tr key={stat.year}>
+                                            <td>
+                                                {stat.year}/
+                                                {(stat.year + 1) % 100}
+                                            </td>
+                                            <td>{stat.pointsPerGame}</td>
+                                            <td>{stat.fieldGoalPercentage}</td>
+                                            <td>{stat.threePointPercentage}</td>
+                                            <td>{stat.assistsPerGame}</td>
+                                            <td>{stat.reboundsPerGame}</td>
+                                            <td>{stat.stealsPerGame}</td>
+                                        </tr>
+                                    ))}
                                 </tbody>
                             </table>
                         </div>
                     </div>
                 );
-            case "Videos":
+
+            case "Mixtapes":
+                if (videos.length === 0) {
+                    return <p>Loading videos...</p>;
+                }
+
+                if (!selectedVideo) {
+                    return <p>Loading videos...</p>;
+                }
+
                 return (
-                    <div className="videos">
-                        {videos.toReversed().map((video) => (
-                            <div key={video} className="youtube-responsive">
-                                <YouTube
-                                    videoId={video}
-                                    opts={{ height: "150%", width: "100%" }}
-                                />
-                            </div>
-                        ))}
+                    <div className="videos-wrapper">
+                        <div className="videos-player">
+                            <iframe
+                                src={`https://www.youtube.com/embed/${selectedVideo.id}?rel=0`}
+                                title={selectedVideo.title}
+                                frameBorder="0"
+                                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                                allowFullScreen
+                            ></iframe>
+                        </div>
+
+                        <div className="videos-sidebar">
+                            <h4 className="videos-heading">Video Playlist</h4>
+                            {[...videos].reverse().map((video) => (
+                                <div
+                                    key={video.id}
+                                    className={`video-item ${
+                                        selectedVideo.id === video.id
+                                            ? "active"
+                                            : ""
+                                    }`}
+                                    onClick={() => setSelectedVideo(video)}
+                                >
+                                    <img
+                                        src={`https://img.youtube.com/vi/${video.id}/default.jpg`}
+                                        alt={video.title}
+                                        className="video-thumbnail"
+                                    />
+                                    <div className="video-info">
+                                        <div className="video-title">
+                                            {video.title}
+                                        </div>
+                                    </div>
+                                </div>
+                            ))}
+                        </div>
                     </div>
                 );
+
+            case "Reels":
+                if (!reels || reels.length === 0 || !selectedReel) {
+                    return <p>Loading reels...</p>;
+                }
+
+                return (
+                    <div className="reels-wrapper">
+                        <div className="reels-player">
+                            <iframe
+                                src={`https://www.youtube.com/embed/${selectedReel.id}?rel=0`}
+                                title={selectedReel.title}
+                                frameBorder="0"
+                                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                                allowFullScreen
+                            ></iframe>
+                        </div>
+
+                        <div className="reels-sidebar">
+                            <h4 className="reels-heading">Reel Playlist</h4>
+                            {reels.map((reel) => (
+                                <div
+                                    key={reel.id}
+                                    className={`reel-item ${
+                                        selectedReel.id === reel.id
+                                            ? "active"
+                                            : ""
+                                    }`}
+                                    onClick={() => setSelectedReel(reel)}
+                                >
+                                    <img
+                                        src={`https://img.youtube.com/vi/${reel.id}/default.jpg`}
+                                        alt={reel.title}
+                                        className="reel-thumbnail"
+                                    />
+                                    <div className="reel-info">
+                                        <div className="reel-title">
+                                            {reel.title}
+                                        </div>
+                                    </div>
+                                </div>
+                            ))}
+                        </div>
+                    </div>
+                );
+
             default:
                 return <h1>Unknown</h1>;
         }
     };
 
-    if (!player) {
-        return <div>Player not found</div>;
-    }
-
     return (
         <div className="profile-wrapper">
             <div className="player-profile">
-                {!player.teams.includes("mens") &&
-                !player.teams.includes("u19") ? (
-                    <div></div>
-                ) : (
+                {(player.teams.includes("mens") ||
+                    player.teams.includes("u19")) && (
                     <div className="related-bios">
                         <select
                             name="Related Bios"
@@ -287,92 +454,75 @@ const PlayerProfile = () => {
                         {player.firstName} {player.lastName}
                     </div>
                 </div>
+
                 <div className="full-player-info">
                     <div className="left-bar">
                         <div className="left-bar-cont">
                             <img className="img" src={player.image} alt="" />
                             <div className="info">
                                 <p>
-                                    <span style={{ fontWeight: "700" }}>
-                                        Height:{" "}
-                                    </span>
+                                    <strong>Height:</strong>
                                     <br />
                                     {player.height}
                                 </p>
                                 <hr />
                                 <p>
-                                    <span style={{ fontWeight: "700" }}>
-                                        Position:{" "}
-                                    </span>
+                                    <strong>Position:</strong>
                                     <br />
                                     {player.position}
                                 </p>
                                 <hr />
                                 <p>
-                                    <span style={{ fontWeight: "700" }}>
-                                        Graduation Class:{" "}
-                                    </span>
+                                    <strong>Graduation Class:</strong>
                                     <br />
                                     {player.class}
                                 </p>
                                 <hr />
                                 <p>
-                                    <span style={{ fontWeight: "700" }}>
-                                        Nationality:{" "}
-                                    </span>{" "}
+                                    <strong>Nationality:</strong>
                                     <br />
                                     {player.nationality}
                                 </p>
                                 <hr />
                                 <p>
-                                    <span style={{ fontWeight: "700" }}>
-                                        Wingspan:{" "}
-                                    </span>{" "}
+                                    <strong>SAT score:</strong>
+                                    <br />
+                                    {player.sat}
+                                </p>
+                                <hr />
+                                <p>
+                                    <strong>Wingspan:</strong>
                                     <br />
                                     {player.wingspan}
                                 </p>
                                 <hr />
                                 <p>
-                                    <span style={{ fontWeight: "700" }}>
-                                        Standing Reach:{" "}
-                                    </span>
-                                    <br /> {player.standingReach}
+                                    <strong>Standing Reach:</strong>
+                                    <br />
+                                    {player.standingReach}
                                 </p>
                             </div>
                         </div>
                     </div>
+
                     <div className="right-bar">
                         <ul>
-                            <li
-                                onClick={handleClick}
-                                style={
-                                    section === "Bio"
-                                        ? { color: "black" }
-                                        : { color: "grey" }
-                                }
-                            >
-                                Bio
-                            </li>
-                            <li
-                                onClick={handleClick}
-                                style={
-                                    section === "Stats"
-                                        ? { color: "black" }
-                                        : { color: "grey" }
-                                }
-                            >
-                                Stats
-                            </li>
-                            <li
-                                onClick={handleClick}
-                                style={
-                                    section === "Videos"
-                                        ? { color: "black" }
-                                        : { color: "grey" }
-                                }
-                            >
-                                Videos
-                            </li>
+                            {["Bio", "Stats", "Mixtapes", "Reels"].map(
+                                (tab) => (
+                                    <li
+                                        key={tab}
+                                        onClick={handleClick}
+                                        style={{
+                                            color:
+                                                section === tab
+                                                    ? "black"
+                                                    : "grey",
+                                        }}
+                                    >
+                                        {tab}
+                                    </li>
+                                )
+                            )}
                         </ul>
                         {renderSection()}
                     </div>

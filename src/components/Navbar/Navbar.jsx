@@ -278,10 +278,10 @@ const Navbar = () => {
                     >
                         <FaGraduationCap size={30} className="icons" />
                     </a>
-                    <a href="#" target="_blank" rel="noreferrer">
+                    <a href="#!" target="_blank" rel="noreferrer">
                         <GiClothes size={30} className="icons" />
                     </a>
-                    <a href="#" target="_blank" rel="noreferrer">
+                    <a href="#!" target="_blank" rel="noreferrer">
                         <FaCartShopping size={30} className="icons" />
                     </a>
                 </div>

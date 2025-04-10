@@ -31,6 +31,8 @@ const initialPlayers = [
         image: "/assets/players/chris-boateng.jpg",
         teams: ["mens", "u19"],
         videos: ["-kE-LpXoKqU", "phCG5zJFwbc", "0Hef-K4_1r8"],
+        playlistId: "PLo8udBlGyZugAmyjw5ydv1mjJt662E_v7",
+        sat: 1210,
         stats: [
             {
                 year: 2023,
@@ -118,6 +120,8 @@ const initialPlayers = [
         image: "/assets/players/olu-eribake.jpg",
         teams: ["mens", "u19"],
         videos: ["XN6rhGXRAgk", "ksMqd1ugWHo", "SoCkOu6bm28"],
+        playlistId: "PLo8udBlGyZugSnNx9O1ZiGmQ2J6a0ssV6",
+        sat: 1280,
         stats: [
             {
                 year: 2023,

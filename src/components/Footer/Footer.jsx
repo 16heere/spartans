@@ -83,7 +83,7 @@ const Footer = () => {
                         <FaGraduationCap size={30} />
                     </a>
                     <a
-                        href="#"
+                        href="#!"
                         target="_blank"
                         rel="noreferrer"
                         className="not-bridge-logo"
@@ -91,7 +91,7 @@ const Footer = () => {
                         <GiClothes size={30} />
                     </a>
                     <a
-                        href="#"
+                        href="#!"
                         target="_blank"
                         rel="noreferrer"
                         className="not-bridge-logo"
