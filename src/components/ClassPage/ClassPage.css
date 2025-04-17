@@ -1,58 +1,82 @@
-.container {
-    padding: 20px;
+.classpage-container {
+    max-width: 1200px;
+    padding: 50px 0;
     text-align: center;
+    margin: 0 auto;
 }
 
-h2 {
-    font-size: 2em;
-    margin-bottom: 20px;
+.classpage-title {
+    font-size: 2.5rem;
+    margin-bottom: 40px;
+    color: #333;
 }
 
-.players {
+.classpage-players {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
+    gap: 20px;
+    padding: 0 20px;
 }
 
-.player-card {
+.classpage-player-card {
     background-color: #fff;
     border: 1px solid #ddd;
-    border-radius: 8px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    margin: 10px;
+    border-radius: 10px;
+    width: 250px;
     padding: 20px;
-    width: 300px;
-    transition: transform 0.2s;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease;
+    text-align: center;
 }
 
-.player-card:hover {
-    transform: scale(1.05);
+.classpage-player-card:hover {
+    transform: scale(1.03);
 }
 
-.player-card img {
-    max-width: 100%;
-    border-radius: 8px;
+.classpage-player-img {
     max-height: 200px;
+    max-width: 100%;
+    object-fit: cover;
+    border-radius: 10px;
+    margin-bottom: 15px;
 }
 
-.player-card h3 {
-    font-size: 1.5em;
+.classpage-player-card h3 {
+    font-size: 1.5rem;
     margin: 10px 0;
     color: #555;
 }
 
-.player-card p {
-    font-size: 1em;
+.classpage-player-card p {
+    font-size: 1rem;
     color: #777;
     margin: 5px 0;
 }
 
-.player-card a {
+.classpage-player-link {
     text-decoration: none;
+    color: inherit;
+    display: block;
+}
+
+/* Responsive Design */
+@media (max-width: 992px) {
+    .classpage-player-card {
+        width: 200px;
+    }
+
+    .classpage-title {
+        font-size: 2rem;
+    }
 }
 
 @media (max-width: 768px) {
-    .player-card {
-        width: 90%;
+    .classpage-player-card {
+        width: 100%;
+    }
+
+    .classpage-title {
+        font-size: 1.75rem;
     }
 }

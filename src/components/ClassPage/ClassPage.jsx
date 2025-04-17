@@ -1,4 +1,3 @@
-// src/components/ClassPage/ClassPage.js
 import React from "react";
 import { useParams, Link } from "react-router-dom";
 import { Players } from "../../Teams";
@@ -18,68 +17,51 @@ function ClassPage() {
     );
 
     return (
-        <div className="container">
-            <h2>Class of {classYear}</h2>
-            <div className="players">
+        <div className="classpage-container">
+            <h2 className="classpage-title">Class of {classYear}</h2>
+            <div className="classpage-players">
                 {classMembers.map((player, index) => (
-                    <div key={index} className="player-card">
+                    <div key={index} className="classpage-player-card">
                         {player.profile ? (
                             <Link
                                 to={`/player/${player.firstName}-${player.lastName}`}
-                                className="player-link"
+                                className="classpage-player-link"
                             >
                                 <img
                                     src={player.image}
                                     alt={`${player.firstName} ${player.lastName}`}
+                                    className="classpage-player-img"
                                 />
                                 <h3>
-                                    {player.firstName} {player.lastName}
+                                    {player.firstName} <br /> {player.lastName}
                                 </h3>
-                                <p>Height: {player.height}</p>
-                                <p>Number: {player.number}</p>
-                                <p>Position: {player.position}</p>
-                                <p>
-                                    Teams:{" "}
-                                    {player.teams.map((team, idx) => {
-                                        if (
-                                            team === "mens" ||
-                                            team === "u19" ||
-                                            team === "u16" ||
-                                            team === "u14"
-                                        ) {
-                                            return (
-                                                <span key={idx}>
-                                                    Spartans{" "}
-                                                    {capitalizeFirstLetter(
-                                                        team
-                                                    )}
-                                                    {idx <
-                                                    player.teams.length - 1
-                                                        ? ", "
-                                                        : ""}
-                                                </span>
-                                            );
-                                        } else {
-                                            return (
-                                                <span key={idx}>
-                                                    {capitalizeFirstLetter(
-                                                        team
-                                                    )}
-                                                    {idx <
-                                                    player.teams.length - 1
-                                                        ? ", "
-                                                        : ""}
-                                                </span>
-                                            );
-                                        }
-                                    })}
-                                </p>
+                                <div className="classpage-player-card-info">
+                                    <p>Height: {player.height}</p>
+                                    <p>Number: {player.number}</p>
+                                    <p>Position: {player.position}</p>
+                                    <p>
+                                        Class: {player.class} ('{player.born}{" "}
+                                        Born)
+                                    </p>
+                                    <p>
+                                        Teams:{" "}
+                                        {player.teams.map((team, idx) => (
+                                            <span key={idx}>
+                                                {capitalizeFirstLetter(team)}
+                                                {idx < player.teams.length - 1
+                                                    ? ", "
+                                                    : ""}
+                                            </span>
+                                        ))}
+                                    </p>
+                                </div>
                             </Link>
                         ) : (
                             <>
                                 <img
                                     src={player.image}
                                     alt={`${player.firstName} ${player.lastName}`}
+                                    className="classpage-player-img"
                                 />
                                 <h3>
                                     {player.firstName} {player.lastName}
@@ -89,39 +71,21 @@ function ClassPage() {
                                 <p>Position: {player.position}</p>
                                 <p>
                                     Teams:{" "}
-                                    {player.teams.map((team, idx) => {
-                                        if (
-                                            team === "mens" ||
+                                    {player.teams.map((team, idx) => (
+                                        <span key={idx}>
+                                            {team === "mens" ||
                                             team === "u19" ||
                                             team === "u16" ||
                                             team === "u14"
-                                        ) {
-                                            return (
-                                                <span key={idx}>
-                                                    Spartans{" "}
-                                                    {capitalizeFirstLetter(
-                                                        team
-                                                    )}
-                                                    {idx <
-                                                    player.teams.length - 1
-                                                        ? ", "
-                                                        : ""}
-                                                </span>
-                                            );
-                                        } else {
-                                            return (
-                                                <span key={idx}>
-                                                    {capitalizeFirstLetter(
-                                                        team
-                                                    )}
-                                                    {idx <
-                                                    player.teams.length - 1
-                                                        ? ", "
-                                                        : ""}
-                                                </span>
-                                            );
-                                        }
-                                    })}
+                                                ? `Spartans ${capitalizeFirstLetter(
+                                                      team
+                                                  )}`
+                                                : capitalizeFirstLetter(team)}
+                                            {idx < player.teams.length - 1
+                                                ? ", "
+                                                : ""}
+                                        </span>
+                                    ))}
                                 </p>
                             </>
                         )}

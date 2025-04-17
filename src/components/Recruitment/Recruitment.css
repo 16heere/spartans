@@ -1,0 +1,81 @@
+.recruitment-container {
+    padding: 3rem 1rem;
+    max-width: 1200px;
+    width: 100%; /* Added to ensure full width */
+    margin: 0 auto;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: stretch; /* Changed from center */
+}
+
+.title {
+    font-size: 3rem;
+    margin-bottom: 0.5rem;
+    font-weight: 700;
+    color: #1a1a1a;
+}
+
+.subtitle {
+    font-size: 1.2rem;
+    margin-bottom: 2.5rem;
+    color: #555;
+}
+
+.class-cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    width: 100%; /* Add this to span full container width */
+    gap: 2rem;
+    padding: 0 1rem;
+}
+
+.class-card {
+    background-color: #ffffff;
+    border: 1px solid #ccc;
+    border-radius: 16px;
+    overflow: hidden;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.06);
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+
+.class-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.12);
+}
+
+.card-link {
+    text-decoration: none;
+    color: inherit;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.class-image {
+    width: 100%;
+    height: 500px;
+    object-fit: cover;
+    object-position: 50% 25%;
+    image-rendering: auto;
+}
+
+.card-content {
+    padding: 1.25rem;
+}
+
+.class-year {
+    font-size: 1.8rem;
+    font-weight: bold;
+    color: #007bff;
+    margin-bottom: 0.5rem;
+}
+
+.class-count {
+    font-size: 1rem;
+    color: #333;
+    margin-bottom: 0.25rem;
+}

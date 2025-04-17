@@ -27,7 +27,11 @@ const PlayerProfile = () => {
 
     useEffect(() => {
         const loadReels = async () => {
-            if (!player || !player.playlistId) return;
+            if (!player || !player.playlistId) {
+                setReels([]);
+                setSelectedReel(null);
+                return;
+            }
 
             const playlistId = player.playlistId;
             const apiKey = process.env.REACT_APP_YT_API_KEY;
@@ -286,39 +290,60 @@ const PlayerProfile = () => {
 
                         <br />
                         <br />
-
-                        <h3>Past Seasons</h3>
-                        <div className="table-container">
-                            <table className="stats-table">
-                                <thead>
-                                    <tr>
-                                        <th>Season</th>
-                                        <th>PPG</th>
-                                        <th>FG%</th>
-                                        <th>3PT%</th>
-                                        <th>APG</th>
-                                        <th>RPG</th>
-                                        <th>SPG</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    {stats.map((stat) => (
-                                        <tr key={stat.year}>
-                                            <td>
-                                                {stat.year}/
-                                                {(stat.year + 1) % 100}
-                                            </td>
-                                            <td>{stat.pointsPerGame}</td>
-                                            <td>{stat.fieldGoalPercentage}</td>
-                                            <td>{stat.threePointPercentage}</td>
-                                            <td>{stat.assistsPerGame}</td>
-                                            <td>{stat.reboundsPerGame}</td>
-                                            <td>{stat.stealsPerGame}</td>
-                                        </tr>
-                                    ))}
-                                </tbody>
-                            </table>
-                        </div>
+                        {!stats || stats.length === 0 ? (
+                            <></>
+                        ) : (
+                            <>
+                                <h3>Past Seasons</h3>
+                                <div className="table-container">
+                                    <table className="stats-table">
+                                        <thead>
+                                            <tr>
+                                                <th>Season</th>
+                                                <th>PPG</th>
+                                                <th>FG%</th>
+                                                <th>3PT%</th>
+                                                <th>APG</th>
+                                                <th>RPG</th>
+                                                <th>SPG</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            {stats.map((stat) => (
+                                                <tr key={stat.year}>
+                                                    <td>
+                                                        {stat.year}/
+                                                        {(stat.year + 1) % 100}
+                                                    </td>
+                                                    <td>
+                                                        {stat.pointsPerGame}
+                                                    </td>
+                                                    <td>
+                                                        {
+                                                            stat.fieldGoalPercentage
+                                                        }
+                                                    </td>
+                                                    <td>
+                                                        {
+                                                            stat.threePointPercentage
+                                                        }
+                                                    </td>
+                                                    <td>
+                                                        {stat.assistsPerGame}
+                                                    </td>
+                                                    <td>
+                                                        {stat.reboundsPerGame}
+                                                    </td>
+                                                    <td>
+                                                        {stat.stealsPerGame}
+                                                    </td>
+                                                </tr>
+                                            ))}
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </>
+                        )}
                     </div>
                 );
 
@@ -373,7 +398,7 @@ const PlayerProfile = () => {
 
             case "Reels":
                 if (!reels || reels.length === 0 || !selectedReel) {
-                    return <p>Loading reels...</p>;
+                    return <p>No reels</p>;
                 }
 
                 return (
@@ -429,11 +454,14 @@ const PlayerProfile = () => {
                     <div className="related-bios">
                         <select
                             name="Related Bios"
-                            defaultValue=""
                             value={selectedPlayer}
                             onChange={handleSelectChange}
                         >
-                            <option value="">Select a player</option>
+                            <option value="">
+                                {player
+                                    ? `${player.firstName} ${player.lastName}`
+                                    : `Select a player`}
+                            </option>
                             {sameTeamPlayers.map((otherPlayer) => (
                                 <option
                                     key={otherPlayer.id}
@@ -466,6 +494,7 @@ const PlayerProfile = () => {
                                     {player.height}
                                 </p>
                                 <hr />
+
                                 <p>
                                     <strong>Position:</strong>
                                     <br />
@@ -477,30 +506,50 @@ const PlayerProfile = () => {
                                     <br />
                                     {player.class}
                                 </p>
-                                <hr />
-                                <p>
-                                    <strong>Nationality:</strong>
-                                    <br />
-                                    {player.nationality}
-                                </p>
-                                <hr />
-                                <p>
-                                    <strong>SAT score:</strong>
-                                    <br />
-                                    {player.sat}
-                                </p>
-                                <hr />
-                                <p>
-                                    <strong>Wingspan:</strong>
-                                    <br />
-                                    {player.wingspan}
-                                </p>
-                                <hr />
-                                <p>
-                                    <strong>Standing Reach:</strong>
-                                    <br />
-                                    {player.standingReach}
-                                </p>
+
+                                {player.nationality && (
+                                    <>
+                                        <hr />
+                                        <p>
+                                            <strong>Nationality:</strong>
+                                            <br />
+                                            {player.nationality}
+                                        </p>
+                                    </>
+                                )}
+
+                                {player.sat && (
+                                    <>
+                                        <hr />
+                                        <p>
+                                            <strong>SAT score:</strong>
+                                            <br />
+                                            {player.sat}
+                                        </p>
+                                    </>
+                                )}
+
+                                {player.wingspan && (
+                                    <>
+                                        <hr />
+                                        <p>
+                                            <strong>Wingspan:</strong>
+                                            <br />
+                                            {player.wingspan}
+                                        </p>
+                                    </>
+                                )}
+
+                                {player.standingReach && (
+                                    <>
+                                        <hr />
+                                        <p>
+                                            <strong>Standing Reach:</strong>
+                                            <br />
+                                            {player.standingReach}
+                                        </p>
+                                    </>
+                                )}
                             </div>
                         </div>
                     </div>

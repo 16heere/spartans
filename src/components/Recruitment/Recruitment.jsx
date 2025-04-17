@@ -1,7 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { Players } from "../../Teams";
-
+import "./Recruitment.css";
 const Recruitment = () => {
     const currentYear = new Date().getFullYear();
     const allPlayers = [...Players];
@@ -21,15 +21,30 @@ const Recruitment = () => {
     }));
 
     return (
-        <div className="container">
+        <div className="recruitment-container">
             <h1>Recruitment Classes</h1>
+            <p className="subtitle">
+                Explore our standout recruiting classes. Click on a year to see
+                the full roster.
+            </p>
             <div className="class-cards">
-                {groupedPlayers.map(({ classYear }, index) => (
-                    <div key={index} className="card">
-                        <Link to={`/class/${classYear}`}>
-                            <h2>
-                                {classYear - 1}/{classYear % 100}
-                            </h2>
+                {groupedPlayers.map(({ classYear, players }, index) => (
+                    <div key={index} className="class-card">
+                        <Link to={`/class/${classYear}`} className="card-link">
+                            <img
+                                src={`/assets/recruitment/${classYear}.png`}
+                                alt={`Class of ${classYear}`}
+                                className="class-image"
+                            />
+                            <div className="card-content">
+                                <h2 className="class-year">
+                                    {classYear - 1}/{classYear % 100}
+                                </h2>
+                                <p className="class-count">
+                                    {players.length} Player
+                                    {players.length > 1 ? "s" : ""}
+                                </p>
+                            </div>
                         </Link>
                     </div>
                 ))}
