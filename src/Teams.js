@@ -30,7 +30,7 @@ const initialPlayers = [
         },
         image: "/assets/players/chris-boateng.jpg",
         teams: ["mens", "u19"],
-        videos: ["-kE-LpXoKqU", "phCG5zJFwbc", "0Hef-K4_1r8"],
+        videos: ["-kE-LpXoKqU", "phCG5zJFwbc", "0Hef-K4_1r8", "6ARACx6Un6s"],
         playlistId: "PLo8udBlGyZugAmyjw5ydv1mjJt662E_v7",
         sat: 1210,
         stats: [
