@@ -120,7 +120,7 @@ const initialPlayers = [
         },
         image: "/assets/players/olu-eribake.jpg",
         teams: ["mens", "u19"],
-        videos: ["XN6rhGXRAgk", "ksMqd1ugWHo", "SoCkOu6bm28"],
+        videos: ["XN6rhGXRAgk", "ksMqd1ugWHo", "SoCkOu6bm28", "dYFiZZkPhdA"],
         playlistId: "PLo8udBlGyZugSnNx9O1ZiGmQ2J6a0ssV6",
         sat: 1280,
         stats: [
