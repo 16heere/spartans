@@ -234,7 +234,7 @@ const PlayerProfile = () => {
                                                 <th>Team</th>
                                                 <th>PPG</th>
                                                 <th>FG%</th>
-                                                <th>3PT%</th>
+                                                <th>3PT% (FIBA)</th>
                                                 <th>APG</th>
                                                 <th>RPG</th>
                                                 <th>SPG</th>
@@ -295,7 +295,7 @@ const PlayerProfile = () => {
                                         <th>Season</th>
                                         <th>PPG</th>
                                         <th>FG%</th>
-                                        <th>3PT%</th>
+                                        <th>3PT% (FIBA)</th>
                                         <th>APG</th>
                                         <th>RPG</th>
                                         <th>SPG</th>
