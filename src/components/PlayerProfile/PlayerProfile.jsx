@@ -233,8 +233,8 @@ const PlayerProfile = () => {
                                             <tr>
                                                 <th>Team</th>
                                                 <th>PPG</th>
-                                                <th>FG%</th>
-                                                <th>3PT% (FIBA)</th>
+                                                {/* <th>FG%</th>
+                                                <th>3PT% (FIBA)</th> */}
                                                 <th>APG</th>
                                                 <th>RPG</th>
                                                 <th>SPG</th>
@@ -251,7 +251,7 @@ const PlayerProfile = () => {
                                                             teamStats.pointsPerGame
                                                         }
                                                     </td>
-                                                    <td>
+                                                    {/* <td>
                                                         {
                                                             teamStats.fieldGoalPercentage
                                                         }
@@ -260,7 +260,7 @@ const PlayerProfile = () => {
                                                         {
                                                             teamStats.threePointPercentage
                                                         }
-                                                    </td>
+                                                    </td> */}
                                                     <td>
                                                         {
                                                             teamStats.assistsPerGame
@@ -294,8 +294,8 @@ const PlayerProfile = () => {
                                     <tr>
                                         <th>Season</th>
                                         <th>PPG</th>
-                                        <th>FG%</th>
-                                        <th>3PT% (FIBA)</th>
+                                        {/* <th>FG%</th>
+                                        <th>3PT% (FIBA)</th> */}
                                         <th>APG</th>
                                         <th>RPG</th>
                                         <th>SPG</th>
@@ -309,8 +309,8 @@ const PlayerProfile = () => {
                                                 {(stat.year + 1) % 100}
                                             </td>
                                             <td>{stat.pointsPerGame}</td>
-                                            <td>{stat.fieldGoalPercentage}</td>
-                                            <td>{stat.threePointPercentage}</td>
+                                            {/* <td>{stat.fieldGoalPercentage}</td>
+                                            <td>{stat.threePointPercentage}</td> */}
                                             <td>{stat.assistsPerGame}</td>
                                             <td>{stat.reboundsPerGame}</td>
                                             <td>{stat.stealsPerGame}</td>
