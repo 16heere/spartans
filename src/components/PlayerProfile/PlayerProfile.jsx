@@ -12,6 +12,8 @@ const PlayerProfile = () => {
     const [selectedReel, setSelectedReel] = useState(null);
     const [videos, setVideos] = useState([]);
     const [selectedVideo, setSelectedVideo] = useState(null);
+    const [loadingReels, setLoadingReels] = useState(true);
+    const [loadingVideos, setLoadingVideos] = useState(true);
 
     const { playerFullName } = useParams();
     const navigate = useNavigate();
@@ -27,7 +29,13 @@ const PlayerProfile = () => {
 
     useEffect(() => {
         const loadReels = async () => {
-            if (!player || !player.playlistId) return;
+            setLoadingReels(true);
+            if (!player || !player.playlistId) {
+                setReels([]);
+                setSelectedReel(null);
+                setLoadingReels(false);
+                return;
+            }
 
             const playlistId = player.playlistId;
             const apiKey = process.env.REACT_APP_YT_API_KEY;
@@ -95,6 +103,8 @@ const PlayerProfile = () => {
                 console.error("Error fetching reels:", error);
                 setReels(player.reels || []);
                 setSelectedReel((player.reels || [])[0] || null);
+            } finally {
+                setLoadingReels(false);
             }
         };
 
@@ -103,7 +113,14 @@ const PlayerProfile = () => {
 
     useEffect(() => {
         const fetchVideoTitles = async () => {
-            if (!player || !player.videos || player.videos.length === 0) return;
+            if (!player || !player.videos || player.videos.length === 0) {
+                setVideos([]);
+                setSelectedVideo(null);
+                setLoadingVideos(false);
+                return;
+            }
+
+            setLoadingVideos(true);
 
             try {
                 const apiKey = process.env.REACT_APP_YT_API_KEY;
@@ -136,6 +153,8 @@ const PlayerProfile = () => {
                     }))
                 );
                 setSelectedVideo(player.videos[player.videos.length - 1]);
+            } finally {
+                setLoadingVideos(false);
             }
         };
 
@@ -295,7 +314,7 @@ const PlayerProfile = () => {
                                         <th>Season</th>
                                         <th>PPG</th>
                                         {/* <th>FG%</th>
-                                        <th>3PT% (FIBA)</th> */}
+                                        <th>3PT%</th> */}
                                         <th>APG</th>
                                         <th>RPG</th>
                                         <th>SPG</th>
@@ -309,8 +328,8 @@ const PlayerProfile = () => {
                                                 {(stat.year + 1) % 100}
                                             </td>
                                             <td>{stat.pointsPerGame}</td>
-                                            {/* <td>{stat.fieldGoalPercentage}</td>
-                                            <td>{stat.threePointPercentage}</td> */}
+                                            <td>{stat.fieldGoalPercentage}</td>
+                                            <td>{stat.threePointPercentage}</td>
                                             <td>{stat.assistsPerGame}</td>
                                             <td>{stat.reboundsPerGame}</td>
                                             <td>{stat.stealsPerGame}</td>
@@ -323,13 +342,9 @@ const PlayerProfile = () => {
                 );
 
             case "Mixtapes":
-                if (videos.length === 0) {
-                    return <p>Loading videos...</p>;
-                }
-
-                if (!selectedVideo) {
-                    return <p>Loading videos...</p>;
-                }
+                if (loadingVideos) return <p>Loading videos...</p>;
+                if (videos.length === 0) return <p>No videos available.</p>;
+                if (!selectedVideo) return <p>No video selected.</p>;
 
                 return (
                     <div className="videos-wrapper">
@@ -372,9 +387,9 @@ const PlayerProfile = () => {
                 );
 
             case "Reels":
-                if (!reels || reels.length === 0 || !selectedReel) {
-                    return <p>Loading reels...</p>;
-                }
+                if (loadingReels) return <p>Loading reels...</p>;
+                if (!reels || reels.length === 0)
+                    return <p>No reels available.</p>;
 
                 return (
                     <div className="reels-wrapper">
@@ -429,11 +444,14 @@ const PlayerProfile = () => {
                     <div className="related-bios">
                         <select
                             name="Related Bios"
-                            defaultValue=""
                             value={selectedPlayer}
                             onChange={handleSelectChange}
                         >
-                            <option value="">Select a player</option>
+                            <option value="">
+                                {player
+                                    ? `${player.firstName} ${player.lastName}`
+                                    : `Select a player`}
+                            </option>
                             {sameTeamPlayers.map((otherPlayer) => (
                                 <option
                                     key={otherPlayer.id}
@@ -466,6 +484,7 @@ const PlayerProfile = () => {
                                     {player.height}
                                 </p>
                                 <hr />
+
                                 <p>
                                     <strong>Position:</strong>
                                     <br />
@@ -477,30 +496,50 @@ const PlayerProfile = () => {
                                     <br />
                                     {player.class}
                                 </p>
-                                <hr />
-                                <p>
-                                    <strong>Nationality:</strong>
-                                    <br />
-                                    {player.nationality}
-                                </p>
-                                <hr />
-                                <p>
-                                    <strong>SAT score:</strong>
-                                    <br />
-                                    {player.sat}
-                                </p>
-                                <hr />
-                                <p>
-                                    <strong>Wingspan:</strong>
-                                    <br />
-                                    {player.wingspan}
-                                </p>
-                                <hr />
-                                <p>
-                                    <strong>Standing Reach:</strong>
-                                    <br />
-                                    {player.standingReach}
-                                </p>
+
+                                {player.nationality && (
+                                    <>
+                                        <hr />
+                                        <p>
+                                            <strong>Nationality:</strong>
+                                            <br />
+                                            {player.nationality}
+                                        </p>
+                                    </>
+                                )}
+
+                                {player.sat && (
+                                    <>
+                                        <hr />
+                                        <p>
+                                            <strong>SAT score:</strong>
+                                            <br />
+                                            {player.sat}
+                                        </p>
+                                    </>
+                                )}
+
+                                {player.wingspan && (
+                                    <>
+                                        <hr />
+                                        <p>
+                                            <strong>Wingspan:</strong>
+                                            <br />
+                                            {player.wingspan}
+                                        </p>
+                                    </>
+                                )}
+
+                                {player.standingReach && (
+                                    <>
+                                        <hr />
+                                        <p>
+                                            <strong>Standing Reach:</strong>
+                                            <br />
+                                            {player.standingReach}
+                                        </p>
+                                    </>
+                                )}
                             </div>
                         </div>
                     </div>
