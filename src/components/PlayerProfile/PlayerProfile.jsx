@@ -12,6 +12,8 @@ const PlayerProfile = () => {
     const [selectedReel, setSelectedReel] = useState(null);
     const [videos, setVideos] = useState([]);
     const [selectedVideo, setSelectedVideo] = useState(null);
+    const [loadingReels, setLoadingReels] = useState(true);
+    const [loadingVideos, setLoadingVideos] = useState(true);
 
     const { playerFullName } = useParams();
     const navigate = useNavigate();
@@ -27,9 +29,11 @@ const PlayerProfile = () => {
 
     useEffect(() => {
         const loadReels = async () => {
+            setLoadingReels(true);
             if (!player || !player.playlistId) {
                 setReels([]);
                 setSelectedReel(null);
+                setLoadingReels(false);
                 return;
             }
 
@@ -99,6 +103,8 @@ const PlayerProfile = () => {
                 console.error("Error fetching reels:", error);
                 setReels(player.reels || []);
                 setSelectedReel((player.reels || [])[0] || null);
+            } finally {
+                setLoadingReels(false);
             }
         };
 
@@ -107,7 +113,14 @@ const PlayerProfile = () => {
 
     useEffect(() => {
         const fetchVideoTitles = async () => {
-            if (!player || !player.videos || player.videos.length === 0) return;
+            if (!player || !player.videos || player.videos.length === 0) {
+                setVideos([]);
+                setSelectedVideo(null);
+                setLoadingVideos(false);
+                return;
+            }
+
+            setLoadingVideos(true);
 
             try {
                 const apiKey = process.env.REACT_APP_YT_API_KEY;
@@ -140,6 +153,8 @@ const PlayerProfile = () => {
                     }))
                 );
                 setSelectedVideo(player.videos[player.videos.length - 1]);
+            } finally {
+                setLoadingVideos(false);
             }
         };
 
@@ -348,13 +363,9 @@ const PlayerProfile = () => {
                 );
 
             case "Mixtapes":
-                if (videos.length === 0) {
-                    return <p>Loading videos...</p>;
-                }
-
-                if (!selectedVideo) {
-                    return <p>Loading videos...</p>;
-                }
+                if (loadingVideos) return <p>Loading videos...</p>;
+                if (videos.length === 0) return <p>No videos available.</p>;
+                if (!selectedVideo) return <p>No video selected.</p>;
 
                 return (
                     <div className="videos-wrapper">
@@ -397,9 +408,9 @@ const PlayerProfile = () => {
                 );
 
             case "Reels":
-                if (!reels || reels.length === 0 || !selectedReel) {
-                    return <p>No reels</p>;
-                }
+                if (loadingReels) return <p>Loading reels...</p>;
+                if (!reels || reels.length === 0)
+                    return <p>No reels available.</p>;
 
                 return (
                     <div className="reels-wrapper">
