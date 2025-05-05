@@ -328,8 +328,8 @@ const PlayerProfile = () => {
                                                 {(stat.year + 1) % 100}
                                             </td>
                                             <td>{stat.pointsPerGame}</td>
-                                            <td>{stat.fieldGoalPercentage}</td>
-                                            <td>{stat.threePointPercentage}</td>
+                                            {/* <td>{stat.fieldGoalPercentage}</td> */}
+                                            {/* <td>{stat.threePointPercentage}</td> */}
                                             <td>{stat.assistsPerGame}</td>
                                             <td>{stat.reboundsPerGame}</td>
                                             <td>{stat.stealsPerGame}</td>
