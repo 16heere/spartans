@@ -340,7 +340,7 @@ const initialPlayers = [
         },
         image: "/assets/players/khalid-sanusi.jpg",
         teams: ["u19"],
-        videos: [],
+        videos: ["fdbEjixo-Ic"],
         playlistId: "",
         sat: null,
         stats: [],
