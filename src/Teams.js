@@ -194,7 +194,7 @@ const initialPlayers = [
         },
         image: "/assets/players/brian-olivers.jpg",
         teams: ["mens", "u19"],
-        videos: [],
+        videos: ["a5IAqAuWVvs"],
         playlistId: "",
         sat: null,
         stats: [
