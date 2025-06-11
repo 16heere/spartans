@@ -46,7 +46,7 @@ const PlayerProfile = () => {
                     {
                         params: {
                             part: "snippet,status",
-                            maxResults: 20,
+                            maxResults: 100,
                             playlistId,
                             key: apiKey,
                         },
@@ -54,6 +54,11 @@ const PlayerProfile = () => {
                 );
 
                 const items = response.data.items;
+
+                console.log("items=");
+                items.forEach((item) => {
+                    console.log(item.snippet.title);
+                });
 
                 // Filter visible and "Private video" items
                 const visibleItems = items.filter(
